@@ -6,8 +6,9 @@ default_registry(settings.get('default_registry'))
 
 docker_build("controller:latest", ".", dockerfile='Dockerfile.tilt',
   live_update=[
-    sync('.', '/go/src/github.com/pivotal/kubernetes-image-mapper/'),
-    run('CGO_ENABLED=0 GOOS=linux GOARCH=amd64 GO111MODULE=on go build -a -o /manager main.go'),
+    sync('.', '/workspace'),
+    run('cd /workspace && go mod download', trigger=['go.mod', 'go.sum']),
+    run('cd /workspace && GO111MODULE=on go build -o /manager main.go'),
     restart_container(),
   ]
 )
