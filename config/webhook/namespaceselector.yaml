@@ -6,7 +6,12 @@ webhooks:
   - name: image-mapper.imagerelocation.pivotal.io
     namespaceSelector:
       matchExpressions:
+        # avoid mutating pods in namespaces which are explicitly disabled
         - key: image-mapper-webhook.image-relocation.pivotal.io/enabled
           operator: NotIn
           values:
             - "false"
+        # avoid mutating pods in the kube-system namespace
+        - key: runLevel
+          operator: NotIn
+          values: ["0","1"]
