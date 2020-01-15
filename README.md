@@ -101,3 +101,16 @@ kubectl delete deployment kubernetes-bootcamp
 kubectl delete -f config/samples/mapper_v1alpha1_imagemap.yaml
 make undeploy IMG=<some-registry>/<project-name>:tag
 ```
+
+## Tilt
+
+If you prefer to use [tilt](https://tilt.dev/) for development, create a file in the root of this repository called
+`tilt_option.json` (ignored by git) with contents similar to the following example:
+```
+{
+  "allowed_k8s_context": "my-personal-cluster",
+  "default_registry": "gcr.io/my-personal-project"
+}
+```
+
+Then run `tilt up` in the root of this repository.
