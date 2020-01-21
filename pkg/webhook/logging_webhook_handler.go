@@ -33,6 +33,7 @@ type loggingWebhookHandler struct {
 }
 
 func NewLoggingWebhookHandler(handler ExtendedHandler, log logr.Logger, debug bool) *loggingWebhookHandler {
+	//log.Info("HI HELLO")
 	return &loggingWebhookHandler{Handler: handler, Log: log, Debug: debug}
 }
 
